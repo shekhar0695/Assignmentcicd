@@ -40,5 +40,12 @@ pipeline {
                 }
             }
         }
+        stage('Deploying to Kubernetes') {
+            steps {
+                script {
+                kubernetesDeploy(configs: "hellodeploy.yaml")
+                }
+            }
+        }
     }
 }
