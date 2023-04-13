@@ -5,16 +5,15 @@ pipeline {
 		maven "maven3"
 	}
 
-		stage('Build') {
-			steps{
-				sh 'mvn install'
-			}
-			post {
-	           success {
-	              echo 'Now Archiving it...'
-	              archiveArtifacts artifacts: '**/target/*.war'
-	           }
-	        }
-		}
-	}
+    stage('Build') {
+        steps{
+            sh 'mvn install'
+        }
+        post {
+           success {
+              echo 'Now Archiving it...'
+              archiveArtifacts artifacts: '**/target/*.war'
+           }
+        }
+    }
 }
