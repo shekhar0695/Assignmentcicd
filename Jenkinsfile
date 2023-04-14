@@ -48,11 +48,9 @@ pipeline {
                         sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@54.158.15.216:/home/ubuntu/jenkins/"
                         script{
                             try{
-                                sh "ssh ubuntu@54.158.15.216 cd jenkins/ "
-                                sh "ssh ubuntu@54.158.15.216 kubectl apply -f ."
+                                sh "ssh ubuntu@54.158.15.216 kubectl apply -f jenkins"
                             }catch(error){
-                                sh "ssh ubuntu@54.158.15.216 cd jenkins/ "
-                                sh "ssh ubuntu@54.158.15.216 kubectl create -f ."
+                                sh "ssh ubuntu@54.158.15.216 kubectl create -f jenkins"
                         }
                     }
                 }
