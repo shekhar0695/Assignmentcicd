@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: hello
-      image: gauthambappalige12/hello:tagversion
+      image: shekharrr/maven:tagversion
       ports:
         - containerPort: 8080

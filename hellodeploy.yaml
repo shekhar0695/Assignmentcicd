@@ -12,6 +12,6 @@ spec:
     spec:
       containers:
         - name: hello-app
-          image: gauthambappalige12/hello:latest
+          image: shekharrr/maven:latest
           ports:
             - containerPort: 8080

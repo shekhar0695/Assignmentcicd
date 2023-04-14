@@ -2,12 +2,12 @@ pipeline {
 	agent any
 
     tools {
-        maven "maven3"
+        maven "maven"
     }
 
     environment {
-        registry = "gauthambappalige12/hello"
-        registryCredential = 'dockerhub'
+        registry = "shekharrr/maven"
+        registryCredential = 'dockerhub-pwd'
     }
 
 
@@ -45,12 +45,12 @@ pipeline {
                   sh "chmod +x changetag.sh"
                   sh "./changetag.sh V$BUILD_NUMBER"
                   sshagent(['kops-login']) {
-                        sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@54.158.15.216:/home/ubuntu/jenkins/"
+                        sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@43.205.128.116:/home/ubuntu/jenkins/"
                         script{
                             try{
-                                sh "ssh ubuntu@54.158.15.216 kubectl apply -f jenkins"
+                                sh "ssh ubuntu@43.205.128.116 kubectl apply -f jenkins"
                             }catch(error){
-                                sh "ssh ubuntu@54.158.15.216 kubectl create -f jenkins"
+                                sh "ssh ubuntu@43.205.128.116 kubectl create -f jenkins"
                         }
                     }
                 }
