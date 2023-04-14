@@ -44,9 +44,10 @@ pipeline {
             steps {
               sh "chmod +x changetag.sh"
               sh "./changetag.sh V$BUILD_NUMBER"
-              sshagent(['kops-login']) {
-              sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
+                sshagent(['kops-login']) {
+                sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
+                }
             }
-        }
+       }
     }
 }
