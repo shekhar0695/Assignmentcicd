@@ -1,13 +1,13 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: helloworld
-spec:
-  selector:
-    app: helloworld
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-      nodeport: 30008
-  type: NodePort
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: helloworld
+  spec:
+    ports:
+      - port: 80
+        nodePort: 30008
+        targetPort: 8080
+        protocol: TCP
+    selector:
+      app: helloworld
+    type: NodePort
