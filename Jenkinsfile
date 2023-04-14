@@ -26,7 +26,7 @@ pipeline {
         stage('Build App Image') {
             steps {
                 script {
-                  dockerImage = docker.build registry + ":latest"
+                  dockerImage = docker.build registry + ":V$BUILD_NUMBER"
                }
             }
         }
@@ -35,16 +35,19 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry('', registryCredential) {
-                        dockerImage.push("latest")
+                        dockerImage.push("V$BUILD_NUMBER")
                     }
                 }
             }
         }
-        stage('Deploying to Kubernetes') {
+        stage('Kubernetes Deploy') {
+            agent {label 'KOPS'}
             steps {
-                script {
-                kubernetesDeploy(configs: "hellodeploy.yaml")
-                }
+              sh "chmod +x changetag.sh"
+              sh "./changetag.sh V$BUILD_NUMBER"
+              sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
+              sh "cd jenkins/"
+              sh "kubectl apply -f ."
             }
         }
     }
