@@ -47,9 +47,9 @@ pipeline {
                   sshagent(['kops-login']) {
                         sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
                         scripts{
-                            try {
+                            try{
                                 sh "ssh ubuntu@34.207.252.152 kubectl apply -f ."
-                            }catch(error) {
+                            }catch(error){
                                 sh "ssh ubuntu@34.207.252.152 kubectl create -f ."
                         }
                     }
