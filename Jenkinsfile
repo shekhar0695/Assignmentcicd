@@ -43,7 +43,7 @@ pipeline {
             steps {
                   sh "chmod +x changetag.sh"
                   sh "./changetag.sh V$BUILD_NUMBER"
-                  sshagent(['kops-login']) {
+                  sshagent(['kubernetes']) {
                         sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@43.205.128.116:/home/ubuntu/jenkins/"
                         script{
                             try{
