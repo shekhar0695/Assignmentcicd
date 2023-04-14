@@ -42,13 +42,19 @@ pipeline {
         }
         stage('Kubernetes Deploy') {
             steps {
-              sh "chmod +x changetag.sh"
-              sh "./changetag.sh V$BUILD_NUMBER"
-                sshagent(['kops-login']) {
-                sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
-                sh "kubectl apply -f ."
+                  sh "chmod +x changetag.sh"
+                  sh "./changetag.sh V$BUILD_NUMBER"
+                  sshagent(['kops-login']) {
+                        sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
+                        scripts {
+                            try {
+                                sh "ssh ubuntu@34.207.252.152 kubectl apply -f ."
+                            }catch(error) {
+                                sh "ssh ubuntu@34.207.252.152 kubectl create -f ."
+                        }
+                    }
                 }
             }
-       }
+        }
     }
 }
