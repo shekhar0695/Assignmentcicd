@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         registry = "shekharrr/maven"
-        registryCredential = 'dockerhub'
+        registryCredential = 'DOCKER_HUB'
     }
 
 
