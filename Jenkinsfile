@@ -1,5 +1,5 @@
 pipeline {
-	agent any
+    agent any
 
     tools {
         maven "maven"
@@ -26,7 +26,7 @@ pipeline {
         stage('Build App Image') {
             steps {
                 script {
-                  dockerImage = sudo docker.build registry + ":V$BUILD_NUMBER"
+                  dockerImage = sudo.docker.build registry + ":V$BUILD_NUMBER"
                }
             }
         }
