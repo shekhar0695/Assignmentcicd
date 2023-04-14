@@ -45,7 +45,7 @@ pipeline {
             steps {
               sh "chmod +x changetag.sh"
               sh "./changetag.sh V$BUILD_NUMBER"
-              sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
+              sh "scp services.yaml hello-pod.yaml ubuntu@34.207.252.152:/home/ubuntu/jenkins/"
               sh "cd jenkins/"
               sh "kubectl apply -f ."
             }
