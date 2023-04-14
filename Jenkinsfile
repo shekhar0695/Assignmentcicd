@@ -30,7 +30,6 @@ pipeline {
                }
             }
         }
-
         stage('Upload Image'){
             steps{
                 script {
