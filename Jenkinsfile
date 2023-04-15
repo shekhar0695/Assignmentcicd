@@ -44,12 +44,12 @@ pipeline {
                   sh "chmod +x changetag.sh"
                   sh "./changetag.sh V$BUILD_NUMBER"
                   sshagent(['kubernetes']) {
-                        sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@3.110.196.94:/home/ubuntu/jenkins/"
+                        sh "scp -o StrictHostKeyChecking=no services.yaml hello-pod.yaml ubuntu@3.108.60.75:/home/ubuntu/jenkins/"
                         script{
                             try{
-                                sh "ssh ubuntu@3.110.196.94 kubectl apply -f jenkins"
+                                sh "ssh ubuntu@3.108.60.75 kubectl apply -f jenkins"
                             }catch(error){
-                                sh "ssh ubuntu@3.110.196.94 kubectl create -f jenkins"
+                                sh "ssh ubuntu@3.108.60.75 kubectl create -f jenkins"
                         }
                     }
                 }
